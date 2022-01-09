@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chess</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.css') }}">
+    <link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/interface.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chessboard-1.0.0.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+</head>
+
+<body>
+    <div class="header">Evaluate Chess Endgames</div>
+    <div class="row">
+        <div class="column left">
+            <div class="switch-toggle switch-holo toggle">
+                <input id="on" name="state-d" type="radio" checked="" />
+                <label for="on" onclick="onSwap(1)">White's Move</label>
+                <input id="off" name="state-d" type="radio" />
+                <label for="off" onclick="onSwap(-1)">Black's Move</label>
+                <a></a>
+            </div>
+            <div id="board" style="width:300px; margin:0 auto;"></div>
+            <button class="button clear" onclick="onClear()">Clear Board</button>
+        </div>
+        <div class="resultcontainer">
+            <div class="result"></div>
+            <div class="tt" href="#" data-toggle="tooltip" title=""></a>
+            </div>
+        </div>
+        <script>
+            var config = {
+                draggable: true,
+                dropOffBoard: 'trash',
+                sparePieces: true,
+                position: 'clear',
+                onDrop: onDrop,
+            }
+            var board = Chessboard('board', config)
+            var move = 1
+            $(function () {
+                $(document).tooltip();
+            });
+            function onClear() {
+                board.clear()
+                getPosition()
+            }
+            function onDrop(source, target, piece, newPos, oldPos, orientation) {
+                getPosition(Chessboard.objToFen(newPos))
+            }
+            function onSwap(turn) {
+                move = turn
+                getPosition(board.fen())
+            }
+            function getPosition(position) {
+                if (position == null) {
+                    $("div.result").replaceWith("<div class='result'><div>");
+                    $("div.tt").replaceWith('<div class="tt" href="#" data-toggle="tooltip" title=""></a>');
+                } else {
+                    $.post("/board", { position1: position, move1: move }, function (data) {
+                        var message = "<div class='result'>";
+                        if (data === "None") {
+                            message += "Invalid Position";
+                            $("div.tt").replaceWith('<div class="tt" href="#" data-toggle="tooltip" title="There may be no legal moves and/or there are more than five pieces on the board">Why is this position invalid?</a>');
+                        } else {
+                            let value = parseInt(data) * move;
+                            if (value == 0) {
+                                message += ("Draw");
+                            } else {
+                                if (value < 0) {
+                                    message += ("Black is winning with DTZ = " + value * -1);
+                                } else {
+                                    message += ("White is winning with DTZ = " + value * -1);
+                                }
+                                $("div.tt").replaceWith('<div class="tt" href="#" data-toggle="tooltip" title="DTZ is the measure of the number of moves until a win or until a capture which will lead to a win.">What is DTZ?</a>');
+                            }
+                        }
+                        message += "</div>"
+                        $("div.result").replaceWith(message);
+                    });
+                }
+            }
+        </script>
+        <script>
+        </script>
+</body>
+
+</html>

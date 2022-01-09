@@ -1,0 +1,62 @@
+.clear {
+    margin: 20px auto 20px auto;
+    width: 200px;
+    display: block;
+}
+
+.resultcontainer {
+    margin-top: 200px;
+    display: inline-block;
+}
+
+.tools {
+    float: left;
+    width: 50%;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.left {
+    width: 40%;
+}
+
+.result {
+    font-weight: 900;
+    font-size: 50px;
+}
+
+
+.switch-holo {
+    margin: 20px auto 20px auto;
+    border-radius: 10%;
+    max-width: 300px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    color: #3a3938;
+}
+
+.tooltip .text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #3a3938;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.tooltip:hover .text {
+    visibility: visible;
+}

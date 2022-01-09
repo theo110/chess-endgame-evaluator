@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+      <title>Home</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
+      <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+</head>
+
+<body>
+      <div class="header">Welcome to my Chess Endgame Evaluator</div>
+      <div class="column left">
+            <h1>About</h1>
+            <div class="text">Evaluate endgame positions using the python-chess library and the syzygy 5-piece endgame database.</div>
+            <h1>Instructions</h1>
+            <ul class="text">
+                  <li>Put up to five pieces on the board</li>
+                  <li>Select who has first move in that position</li>
+                  <li>Read the evaluation on the right</li>
+            </ul>
+      </div>
+      <a href="board"><button class="button begin">Begin!</button></a>
+</body>
+
+</html>
