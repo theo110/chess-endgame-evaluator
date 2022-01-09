@@ -1,4 +1,3 @@
-from os import popen
 import chess
 import chess.syzygy
 

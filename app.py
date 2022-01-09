@@ -1,4 +1,3 @@
-from logging import debug
 import flask
 import database
 
