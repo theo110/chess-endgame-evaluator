@@ -70,6 +70,7 @@
                             let value = parseInt(data) * move;
                             if (value == 0) {
                                 message += ("Draw");
+                                $("div.tt").replaceWith('<div class="tt" href="#" data-toggle="tooltip" title=""></a>');
                             } else {
                                 if (value < 0) {
                                     message += ("Black is winning with DTZ = " + value * -1);
