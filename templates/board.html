@@ -75,9 +75,9 @@
                                 if (value < 0) {
                                     message += ("Black is winning with DTZ = " + value * -1);
                                 } else {
-                                    message += ("White is winning with DTZ = " + value * -1);
+                                    message += ("White is winning with DTZ = " + value);
                                 }
-                                $("div.tt").replaceWith('<div class="tt" href="#" data-toggle="tooltip" title="DTZ is the measure of the number of moves until a win or until a capture which will lead to a win.">What is DTZ?</a>');
+                                $("div.tt").replaceWith('<div class="tt" href="#" data-toggle="tooltip" title="DTZ is the measure of the number of moves until a win or until a capture which will lead to a win. Some people may play with the rule where 50 moves without a win or capture results in a draw.">What is DTZ?</a>');
                             }
                         }
                         message += "</div>"
